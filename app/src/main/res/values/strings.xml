@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Assignment Bookxpert</string>
+    <string name="view_pdf">View Pdf</string>
+    <string name="capture_image">Capture Image</string>
+    <string name="get_data">Get Data</string>
+    <string name="view_data">View Data</string>
+    <string name="push_notifications">Push Notifications</string>
+    <string name="continue_as_a_guest_user">Continue as a Guest User</string>
 </resources>

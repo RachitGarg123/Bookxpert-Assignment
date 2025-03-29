@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.bookxpert.assignment.home.presentation.HomeScreen
 import com.bookxpert.assignment.signIn.presentation.GoogleSignInScreen
 import com.bookxpert.assignment.ui.theme.AssignmentBookxpertTheme
 
@@ -22,6 +23,7 @@ class MainActivity : ComponentActivity() {
             AssignmentBookxpertTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     GoogleSignInScreen()
+//                    HomeScreen()
                 }
             }
         }
