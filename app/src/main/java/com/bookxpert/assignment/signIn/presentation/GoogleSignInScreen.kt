@@ -5,7 +5,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -32,20 +31,26 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.bookxpert.assignment.R
+import com.bookxpert.assignment.core.utility.LogType
+import com.bookxpert.assignment.core.utility.printLog
 
 @Composable
-fun GoogleSignInScreen(modifier: Modifier = Modifier) {
+fun GoogleSignInScreen(
+    modifier: Modifier = Modifier,
+    clicked: Boolean,
+    onGoogleSignIn: () -> Unit,
+    onGoogleSignInButtonClicked: () -> Unit
+) {
     Column(
         modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        var clicked by remember { mutableStateOf(false) }
         Surface(
             color = MaterialTheme.colorScheme.surface,
             shape = MaterialTheme.shapes.small,
             border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
-            onClick = { clicked = !clicked }
+            onClick = { onGoogleSignInButtonClicked() }
         ) {
             Row(
                 modifier = Modifier
@@ -58,17 +63,19 @@ fun GoogleSignInScreen(modifier: Modifier = Modifier) {
             ) {
                 Icon(
                     painter = painterResource(R.drawable.ic_google_logo),
-                    contentDescription = "Google Icon",
+                    contentDescription = stringResource(R.string.google_icon),
                     tint = Color.Unspecified
                 )
                 Spacer(modifier = Modifier.width(8.dp))
-                Text(text = "Sign up with Google")
+                Text(text = stringResource(R.string.sign_up_with_google))
                 if (clicked) {
+                    printLog(LogType.DEBUG, "googleSignIn","isClicked")
                     Spacer(modifier = Modifier.width(16.dp))
                     CircularProgressIndicator(
                         modifier = Modifier.width(20.dp).height(20.dp),
                         strokeWidth = 2.dp
                     )
+                    onGoogleSignIn()
                 }
             }
         }
@@ -89,8 +96,8 @@ fun GoogleSignInScreen(modifier: Modifier = Modifier) {
             ) {
                 Icon(
                     imageVector = Icons.Default.Person,
-                    contentDescription = "Google Icon",
-                    tint = Color.Unspecified
+                    contentDescription = stringResource(R.string.person_placeholder),
+                    tint = MaterialTheme.colorScheme.primary
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(text = stringResource(R.string.continue_as_a_guest_user))
@@ -102,5 +109,9 @@ fun GoogleSignInScreen(modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 private fun GoogleSignInScreenPreview() {
-    GoogleSignInScreen()
+    GoogleSignInScreen(
+        clicked = false,
+        onGoogleSignIn = {},
+        onGoogleSignInButtonClicked = {}
+    )
 }

@@ -6,4 +6,8 @@
     <string name="view_data">View Data</string>
     <string name="push_notifications">Push Notifications</string>
     <string name="continue_as_a_guest_user">Continue as a Guest User</string>
+    <string name="web_default_id">769062717869-germ2gh64ddumcma3g9paa0n5bs6qhbq.apps.googleusercontent.com</string>
+    <string name="sign_up_with_google">Sign up with Google</string>
+    <string name="google_icon">Google Icon</string>
+    <string name="person_placeholder">Person Placeholder</string>
 </resources>
