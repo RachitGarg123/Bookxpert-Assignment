@@ -1,6 +1,5 @@
 package com.bookxpert.assignment.signIn.presentation
 
-import android.widget.Toast
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
@@ -30,14 +29,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.bookxpert.assignment.R
 import com.bookxpert.assignment.core.navigation.Screen
 import com.bookxpert.assignment.core.utility.LogType
 import com.bookxpert.assignment.core.utility.printLog
-import com.bookxpert.assignment.core.utility.showToast
 import com.bookxpert.assignment.home.presentation.HomeViewModel
 
 @Composable
@@ -86,7 +83,6 @@ fun GoogleSignInScreen(
                         if(firebaseUser == null) {
                             clicked = false
                         } else {
-                            showToast("userName ---> ${firebaseUser.displayName}", Toast.LENGTH_LONG)
                             homeViewModel.userLoggedIn(true)
                             navHostController.popBackStack()
                             navHostController.navigate(Screen.Home.route)
@@ -124,10 +120,4 @@ fun GoogleSignInScreen(
             }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun GoogleSignInScreenPreview() {
-//    GoogleSignInScreen(rememberNavController())
 }

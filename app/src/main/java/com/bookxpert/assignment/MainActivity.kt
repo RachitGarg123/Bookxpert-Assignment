@@ -10,18 +10,18 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.bookxpert.assignment.home.presentation.HomeViewModel
 import com.bookxpert.assignment.ui.theme.AssignmentBookxpertTheme
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.compose.ui.Alignment
-import androidx.datastore.core.DataStore
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.bookxpert.assignment.core.navigation.Screen
 import com.bookxpert.assignment.core.navigation.SetupNavGraph
-import com.bookxpert.assignment.home.data.HomeRepository
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -53,24 +53,18 @@ fun LoadUiSetUpNavGraph(
     homeViewModel: HomeViewModel,
 ) {
     Scaffold(modifier = Modifier.fillMaxSize()) { _ ->
-        if(homeViewModel.isUserLoggedIn == null) {
+        val isUserLoggedIn by homeViewModel.isUserLoggedIn.collectAsState()
+        if(isUserLoggedIn == null) {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 CircularProgressIndicator()
             }
         } else {
-            val startDestination = if (homeViewModel.isUserLoggedIn == true) Screen.Home.route else Screen.Detail.route
+            val startDestination = if (isUserLoggedIn == true) Screen.Home.route else Screen.GoogleSignIn.route
             SetupNavGraph(
                 navController = navController,
                 homeViewModel = homeViewModel,
                 startDestination = startDestination
             )
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    AssignmentBookxpertTheme {
     }
 }

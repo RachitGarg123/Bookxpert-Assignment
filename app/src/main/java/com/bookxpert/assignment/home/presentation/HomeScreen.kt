@@ -1,6 +1,5 @@
 package com.bookxpert.assignment.home.presentation
 
-import android.graphics.drawable.shapes.Shape
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,28 +10,20 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Shapes
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.credentials.GetCredentialRequest
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.bookxpert.assignment.R
 import androidx.compose.runtime.getValue
 import com.bookxpert.assignment.core.navigation.Screen
-import com.bookxpert.assignment.core.utility.LogType
-import com.bookxpert.assignment.core.utility.printLog
 import com.bookxpert.assignment.core.utility.showToast
 
 @Composable
@@ -41,8 +32,8 @@ fun HomeScreen(
     navHostController: NavHostController,
     homeViewModel: HomeViewModel
 ) {
-    val apiResponse by remember { derivedStateOf { homeViewModel.apiResponse } }
-    val isLoading by remember { derivedStateOf { homeViewModel.isLoading } }
+    val objectsResponse by  homeViewModel.objectsResponse.collectAsState()
+    val isLoading by  homeViewModel.isLoading.collectAsState()
 
     Column(
         modifier = modifier.fillMaxSize(),
@@ -52,10 +43,8 @@ fun HomeScreen(
         if(isLoading) {
             CircularProgressIndicator()
         }
-        if(apiResponse.isNotEmpty()) {
-            printLog(LogType.DEBUG, tag = "roomDB", "1apiResponse ----> $apiResponse")
-            homeViewModel.insertAllObjectsData(apiResponse)
-            showToast("response ---> $apiResponse", Toast.LENGTH_LONG)
+        if(objectsResponse.isNotEmpty()) {
+            homeViewModel.insertAllObjectsData(objectsResponse)
         }
         Button(
             onClick = {},
@@ -79,13 +68,14 @@ fun HomeScreen(
         ) {
             Text(text = stringResource(R.string.get_data))
         }
-        if(homeViewModel.localDataResponse.isNotEmpty())
-        showToast(homeViewModel.localDataResponse.toString(), Toast.LENGTH_LONG)
+        val localDataResponse by homeViewModel.localDataResponse.collectAsState()
+        if(localDataResponse.isNotEmpty()) {
+            showToast(homeViewModel.localDataResponse.toString(), Toast.LENGTH_LONG)
+        }
 
         Button(
             onClick = {
-//                showToast(homeViewModel.localDataResponse.toString(), Toast.LENGTH_LONG)
-                navHostController.navigate(Screen.ObjectItem.route)
+                navHostController.navigate(Screen.Objects.route)
             },
             shape = RoundedCornerShape(10.dp)
         ) {
@@ -107,10 +97,4 @@ fun HomeScreen(
             )
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun HomeScreenPreview() {
-//    HomeScreen(navHostController = rememberNavController())
 }
