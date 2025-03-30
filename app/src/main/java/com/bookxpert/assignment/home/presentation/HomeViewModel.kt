@@ -21,6 +21,7 @@ import com.bookxpert.assignment.notification.data.NotificationRepository
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.onStart
@@ -35,12 +36,13 @@ class HomeViewModel @Inject constructor(private val homeRepository: HomeReposito
     val database = ObjectsDatabase.getInstance(AssignmentBookxpertApplication.appContext)
     val objectsDao = database.objectsDao()
 
-    var clicked by mutableStateOf(false)
-
     var apiResponse by mutableStateOf<MutableList<Objects>>(mutableListOf())
         private set
 
     var isLoading by mutableStateOf(false)
+        private set
+
+    var isUserLoggedIn by mutableStateOf<Boolean?>(null)
         private set
 
     var localDataResponse by mutableStateOf<MutableList<Objects>>(mutableListOf())
@@ -87,5 +89,15 @@ class HomeViewModel @Inject constructor(private val homeRepository: HomeReposito
 //            localDataResponse.clear()
             localDataResponse = it.objects.toMutableList()
         }
+    }
+
+    fun getUserLoggedIn() = viewModelScope.launch {
+        homeRepository.isUserLoggedIn.collect {
+            isUserLoggedIn = it
+        }
+    }
+
+    fun userLoggedIn(isUserLoggedIn: Boolean) = viewModelScope.launch {
+        homeRepository.updateLoggedInState(isUserLoggedIn)
     }
 }

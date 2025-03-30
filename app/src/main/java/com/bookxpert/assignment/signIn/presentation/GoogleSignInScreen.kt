@@ -84,9 +84,11 @@ fun GoogleSignInScreen(
                     )
                     homeViewModel.tapGoogleSignIn(LocalContext.current) { firebaseUser ->
                         if(firebaseUser == null) {
-                            homeViewModel.clicked = false
+                            clicked = false
                         } else {
                             showToast("userName ---> ${firebaseUser.displayName}", Toast.LENGTH_LONG)
+                            homeViewModel.userLoggedIn(true)
+                            navHostController.popBackStack()
                             navHostController.navigate(Screen.Home.route)
                         }
                     }
@@ -98,7 +100,10 @@ fun GoogleSignInScreen(
             color = MaterialTheme.colorScheme.surface,
             shape = MaterialTheme.shapes.small,
             border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
-            onClick = { navHostController.navigate(Screen.Home.route) }
+            onClick = {
+                navHostController.popBackStack()
+                navHostController.navigate(Screen.Home.route)
+            }
         ) {
             Row(
                 modifier = Modifier

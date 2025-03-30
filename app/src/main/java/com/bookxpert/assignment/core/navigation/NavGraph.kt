@@ -29,11 +29,12 @@ import com.bookxpert.assignment.objectDetails.presentation.ObjectDataScreen
 fun SetupNavGraph(
     modifier: Modifier = Modifier,
     navController: NavHostController,
-    homeViewModel: HomeViewModel
+    homeViewModel: HomeViewModel,
+    startDestination: String
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.Detail.route,
+        startDestination = startDestination
     ) {
         composable(
             route = Screen.Home.route
