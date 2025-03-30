@@ -64,7 +64,7 @@ class HomeViewModel @Inject constructor(private val homeRepository: HomeReposito
 
     private suspend fun insertObjectsData(objects: MutableList<Objects>) = withContext(Dispatchers.IO) {
         objectsDao.insertObjects(ObjectsEntity(objects = objects))
-        val insertedData = objectsDao.getAllObjects().firstOrNull()
+        val insertedData = objectsDao.getAllObjects()?.firstOrNull()
     }
 
     fun insertAllObjectsData(objects: MutableList<Objects>) = viewModelScope.launch {
@@ -72,8 +72,8 @@ class HomeViewModel @Inject constructor(private val homeRepository: HomeReposito
     }
 
     fun getObjectsFromLocal() = viewModelScope.launch {
-        objectsDao.getAllObjects().collect {
-            _localDataResponse.value = it.objects.toMutableList()
+        objectsDao.getAllObjects()?.collect {
+            _localDataResponse.value = it?.objects?.toMutableList() ?: mutableListOf()
         }
     }
 

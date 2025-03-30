@@ -13,7 +13,7 @@ interface ObjectsDao {
     suspend fun insertObjects(objects: ObjectsEntity)
 
     @Query("SELECT * FROM objects_entity ORDER BY id DESC LIMIT 1")
-    fun getAllObjects(): Flow<ObjectsEntity>
+    fun getAllObjects(): Flow<ObjectsEntity?>?
 
     @Delete
     suspend fun deleteObject(objects: ObjectsEntity)
