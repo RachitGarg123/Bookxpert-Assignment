@@ -23,6 +23,7 @@ import androidx.compose.runtime.setValue
 import com.bookxpert.assignment.core.AssignmentBookxpertApplication
 import com.bookxpert.assignment.core.utility.showToast
 import com.bookxpert.assignment.home.presentation.HomeViewModel
+import com.bookxpert.assignment.objectDetails.presentation.ObjectDataScreen
 
 @Composable
 fun SetupNavGraph(
@@ -46,6 +47,14 @@ fun SetupNavGraph(
             route = Screen.Detail.route,
         ) {
             GoogleSignInScreen(
+                navHostController = navController,
+                homeViewModel = homeViewModel
+            )
+        }
+        composable(
+            route = Screen.ObjectItem.route,
+        ) {
+            ObjectDataScreen(
                 navHostController = navController,
                 homeViewModel = homeViewModel
             )

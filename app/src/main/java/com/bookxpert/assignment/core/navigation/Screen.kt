@@ -9,7 +9,7 @@ sealed class Screen(val route: String) {
 
     data object Detail: Screen(route = "detail_screen")
 
-    data object Login: Screen(route = "login_screen")
+    data object ObjectItem: Screen(route = "login_screen")
 
     data object Signup: Screen(route = "signup_screen")
 }

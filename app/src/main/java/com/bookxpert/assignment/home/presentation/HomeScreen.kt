@@ -30,6 +30,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.bookxpert.assignment.R
 import androidx.compose.runtime.getValue
+import com.bookxpert.assignment.core.navigation.Screen
+import com.bookxpert.assignment.core.utility.LogType
+import com.bookxpert.assignment.core.utility.printLog
 import com.bookxpert.assignment.core.utility.showToast
 
 @Composable
@@ -50,6 +53,8 @@ fun HomeScreen(
             CircularProgressIndicator()
         }
         if(apiResponse.isNotEmpty()) {
+            printLog(LogType.DEBUG, tag = "roomDB", "1apiResponse ----> $apiResponse")
+            homeViewModel.insertAllObjectsData(apiResponse)
             showToast("response ---> $apiResponse", Toast.LENGTH_LONG)
         }
         Button(
@@ -74,9 +79,14 @@ fun HomeScreen(
         ) {
             Text(text = stringResource(R.string.get_data))
         }
+        if(homeViewModel.localDataResponse.isNotEmpty())
+        showToast(homeViewModel.localDataResponse.toString(), Toast.LENGTH_LONG)
 
         Button(
-            onClick = {},
+            onClick = {
+//                showToast(homeViewModel.localDataResponse.toString(), Toast.LENGTH_LONG)
+                navHostController.navigate(Screen.ObjectItem.route)
+            },
             shape = RoundedCornerShape(10.dp)
         ) {
             Text(text = stringResource(R.string.view_data))

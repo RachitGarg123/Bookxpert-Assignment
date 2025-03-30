@@ -98,6 +98,7 @@ fun GoogleSignInScreen(
             color = MaterialTheme.colorScheme.surface,
             shape = MaterialTheme.shapes.small,
             border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
+            onClick = { navHostController.navigate(Screen.Home.route) }
         ) {
             Row(
                 modifier = Modifier
