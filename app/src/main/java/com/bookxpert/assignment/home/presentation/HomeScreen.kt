@@ -2,6 +2,7 @@ package com.bookxpert.assignment.home.presentation
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -41,9 +42,12 @@ fun HomeScreen(
         verticalArrangement = Arrangement.SpaceEvenly
     ) {
         if(isLoading) {
-            CircularProgressIndicator()
+            Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                CircularProgressIndicator()
+            }
         }
         if(objectsResponse.isNotEmpty()) {
+            showToast("Api Success", Toast.LENGTH_SHORT)
             homeViewModel.insertAllObjectsData(objectsResponse)
         }
         Button(
