@@ -1,7 +1,7 @@
 package com.bookxpert.assignment.home.data
 
 data class Objects(
-    val id: String,
-    val name: String,
-    val data: ObjectDetails
+    val id: String? = null,
+    val name: String? = null,
+    val data: ObjectDetails? = null
 )

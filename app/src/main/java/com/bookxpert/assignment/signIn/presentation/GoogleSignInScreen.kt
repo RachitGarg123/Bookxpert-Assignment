@@ -33,9 +33,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.bookxpert.assignment.R
-import com.bookxpert.assignment.core.AssignmentBookxpertApplication
 import com.bookxpert.assignment.core.navigation.Screen
 import com.bookxpert.assignment.core.utility.LogType
 import com.bookxpert.assignment.core.utility.printLog

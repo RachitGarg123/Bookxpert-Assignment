@@ -7,6 +7,6 @@ import retrofit2.http.GET
 interface ApiInterface {
 
     @GET(ApiEndPoints.OBJECTS)
-    suspend fun getData(): List<Objects>
+    suspend fun getObjects(): List<Objects>
 
 }
