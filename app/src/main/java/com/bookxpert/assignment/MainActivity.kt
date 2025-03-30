@@ -52,7 +52,7 @@ fun LoadUiSetUpNavGraph(
     navController: NavHostController,
     homeViewModel: HomeViewModel,
 ) {
-    Scaffold(modifier = Modifier.fillMaxSize()) { _ ->
+    Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         val isUserLoggedIn by homeViewModel.isUserLoggedIn.collectAsState()
         if(isUserLoggedIn == null) {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
@@ -63,7 +63,8 @@ fun LoadUiSetUpNavGraph(
             SetupNavGraph(
                 navController = navController,
                 homeViewModel = homeViewModel,
-                startDestination = startDestination
+                startDestination = startDestination,
+                innerPadding = innerPadding
             )
         }
     }

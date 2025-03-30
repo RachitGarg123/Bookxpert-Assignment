@@ -1,5 +1,6 @@
 package com.bookxpert.assignment.core.navigation
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -13,7 +14,8 @@ import com.bookxpert.assignment.objectDetails.presentation.ObjectDataScreen
 fun SetupNavGraph(
     navController: NavHostController,
     homeViewModel: HomeViewModel,
-    startDestination: String
+    startDestination: String,
+    innerPadding: PaddingValues
 ) {
     NavHost(
         navController = navController,
@@ -40,7 +42,8 @@ fun SetupNavGraph(
         ) {
             ObjectDataScreen(
                 navHostController = navController,
-                homeViewModel = homeViewModel
+                homeViewModel = homeViewModel,
+                innerPadding = innerPadding
             )
         }
     }
