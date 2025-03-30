@@ -25,33 +25,45 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.bookxpert.assignment.core.navigation.Screen
+import com.bookxpert.assignment.core.navigation.SetupNavGraph
+import com.bookxpert.assignment.core.utility.showToast
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    private val homeViewModel = HomeViewModel()
+    private val homeViewModel: HomeViewModel by viewModels()
+    private lateinit var navController: NavHostController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             AssignmentBookxpertTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    var clicked by remember { mutableStateOf(false) }
-                    GoogleSignInScreen(
-                        clicked = clicked,
-                         onGoogleSignIn = {
-                            homeViewModel.tapGoogleSignIn(this) { firebaseUser ->
-                                if(firebaseUser == null) {
-                                    clicked = false
-                                }
-                            }
-                        },
-                        onGoogleSignInButtonClicked = {
-                            clicked = true
-                        }
-                    )
-                }
+                navController = rememberNavController()
+                SetupNavGraph(navController = navController, homeViewModel = homeViewModel)
+//                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+//                    var clicked by remember { mutableStateOf(false) }
+//                    GoogleSignInScreen(
+//                        navHostController = navController,
+//                        clicked = clicked,
+//                         onGoogleSignIn = {
+//                            homeViewModel.tapGoogleSignIn(this) { firebaseUser ->
+//                                if(firebaseUser == null) {
+//                                    clicked = false
+//                                } else {
+//                                    showToast("userName ---> ${firebaseUser.displayName}", Toast.LENGTH_LONG)
+//                                    navController.navigate(Screen.Home.route)
+//                                }
+//                            }
+//                        },
+//                        onGoogleSignInButtonClicked = {
+//                            clicked = true
+//                        }
+//                    )
+//                }
             }
         }
         homeViewModel.setupGoogleSignIn()

@@ -22,12 +22,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.credentials.GetCredentialRequest
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.bookxpert.assignment.R
 import com.bookxpert.assignment.core.AssignmentBookxpertApplication
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
+fun HomeScreen(
+    modifier: Modifier = Modifier,
+    navHostController: NavHostController
+) {
     Column(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -81,5 +86,5 @@ fun HomeScreen(modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 private fun HomeScreenPreview() {
-    HomeScreen()
+    HomeScreen(navHostController = rememberNavController())
 }

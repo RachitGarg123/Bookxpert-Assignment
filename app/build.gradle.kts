@@ -59,6 +59,9 @@ android {
         compose = true
         buildConfig = true
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.6.0"
+    }
 }
 
 dependencies {
@@ -110,6 +113,8 @@ dependencies {
     implementation(libs.googleid)
     implementation(libs.firebase.auth.ktx)
 
+    // navigation
+    implementation(libs.androidx.navigation.compose)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
