@@ -1,5 +1,7 @@
 package com.bookxpert.assignment.core.navigation
 
+const val CAMERAX_PREVIEW_KEY = "camerax_preview_key"
+
 sealed class Screen(val route: String) {
 
     data object Home: Screen(route = "home_screen")
@@ -8,7 +10,5 @@ sealed class Screen(val route: String) {
 
     data object Objects: Screen(route = "login_screen")
 
-    data object CameraGallery: Screen(route = "camera_gallery_screen")
-
-    data object CameraXPreview: Screen(route = "camera_preview_screen")
+    data object CameraXPreview: Screen(route = "camera_preview_screen/{$CAMERAX_PREVIEW_KEY}")
 }

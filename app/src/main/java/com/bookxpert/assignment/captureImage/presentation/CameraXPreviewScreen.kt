@@ -26,14 +26,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.navigation.NavHostController
 import coil3.compose.rememberAsyncImagePainter
-import com.bookxpert.assignment.core.utility.createImageFile
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
@@ -41,7 +40,8 @@ import kotlin.coroutines.suspendCoroutine
 @Composable
 fun CameraPreviewScreen(
     navHostController: NavHostController,
-    innerPadding: PaddingValues
+    innerPadding: PaddingValues,
+    galleryImageUri: Uri?
 ) {
     val lensFacing = CameraSelector.LENS_FACING_BACK
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -62,6 +62,7 @@ fun CameraPreviewScreen(
         preview.surfaceProvider = previewView.surfaceProvider
     }
     Box(contentAlignment = Alignment.BottomCenter, modifier = Modifier.fillMaxSize().padding(innerPadding)) {
+        imageUri = galleryImageUri
         if(imageUri != null) {
             Image(
                 modifier = Modifier.fillMaxSize(),

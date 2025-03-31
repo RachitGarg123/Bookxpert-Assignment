@@ -130,7 +130,7 @@ fun HomeScreen(
         var imageUri by remember { mutableStateOf<Uri?>(null) }
         var tempUri by remember { mutableStateOf<Uri?>(null) }
 
-        val launcher = rememberLauncherForActivityResult(
+        val cameraLauncher = rememberLauncherForActivityResult(
             contract = ActivityResultContracts.TakePicture(),
             onResult = { success ->
                 if (success) {
@@ -148,10 +148,18 @@ fun HomeScreen(
                 if (isGranted) {
                     val uri = createImageFile(context)
                     tempUri = uri
-                    launcher.launch(uri)
+                    cameraLauncher.launch(uri)
                 } else {
                     Toast.makeText(context, "Camera permission denied!", Toast.LENGTH_SHORT).show()
                 }
+            }
+        )
+        val galleryLauncher = rememberLauncherForActivityResult(
+            contract = ActivityResultContracts.GetContent(),
+            onResult = { uri: Uri? ->
+                imageUri = uri
+                val encodedString = Uri.encode(imageUri.toString())
+                navHostController.navigate("camera_preview_screen/$encodedString") {}
             }
         )
         Dialog(onDismissRequest = { showDialog = false }) {
@@ -168,7 +176,7 @@ fun HomeScreen(
                     Text(
                         modifier = Modifier.padding(vertical = 15.dp, horizontal = 10.dp).clickable {
                             if (ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-                                navHostController.navigate(Screen.CameraXPreview.route) {}
+                                navHostController.navigate("camera_preview_screen/") {}
 //                            val uri = createImageFile(context)
 //                            imageUri = uri
 //                            launcher.launch(uri)
@@ -180,7 +188,10 @@ fun HomeScreen(
                         fontSize = 20.sp
                     )
                     Text(
-                        modifier = Modifier.padding(vertical = 15.dp, horizontal = 10.dp).clickable {  },
+                        modifier = Modifier.padding(vertical = 15.dp, horizontal = 10.dp).clickable {
+                            galleryLauncher.launch("image/*")
+//                            showDialog = false
+                        },
                         text = stringResource(R.string.gallery),
                         fontSize = 20.sp
                     )

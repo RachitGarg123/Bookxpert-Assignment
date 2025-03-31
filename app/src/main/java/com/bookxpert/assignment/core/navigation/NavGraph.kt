@@ -4,11 +4,13 @@ import android.net.Uri
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.bookxpert.assignment.captureImage.presentation.CameraGallerySelector
+import androidx.navigation.navArgument
 import com.bookxpert.assignment.captureImage.presentation.CameraPreviewScreen
-//import com.bookxpert.assignment.captureImage.presentation.CameraPreviewScreen
+import com.bookxpert.assignment.core.utility.LogType
+import com.bookxpert.assignment.core.utility.printLog
 import com.bookxpert.assignment.home.presentation.HomeScreen
 import com.bookxpert.assignment.signIn.presentation.GoogleSignInScreen
 import com.bookxpert.assignment.home.presentation.HomeViewModel
@@ -51,14 +53,18 @@ fun SetupNavGraph(
             )
         }
         composable(
-            route = Screen.CameraGallery.route,
-        ) {
-            CameraGallerySelector(navController)
-        }
-        composable(
-            route = Screen.CameraXPreview.route,
-        ) {
-            CameraPreviewScreen(navController, innerPadding)
+            route = "camera_preview_screen/{$CAMERAX_PREVIEW_KEY}",
+            arguments = listOf(
+                navArgument(CAMERAX_PREVIEW_KEY) {
+                    type = NavType.StringType
+                    nullable = true
+                }
+            )
+        ) { navBackStackEntry ->
+            printLog(LogType.DEBUG, "imageUri", "${navBackStackEntry.arguments?.getString(CAMERAX_PREVIEW_KEY)}")
+            val encodedUri = navBackStackEntry.arguments?.getString(CAMERAX_PREVIEW_KEY)
+            val imageUri = encodedUri?.let { Uri.parse(it) }
+            CameraPreviewScreen(navController, innerPadding, imageUri)
         }
     }
 }
