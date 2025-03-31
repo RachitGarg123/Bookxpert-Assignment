@@ -68,7 +68,9 @@ fun HomeScreen(
             homeViewModel.insertAllObjectsData(objectsResponse)
         }
         Button(
-            onClick = {},
+            onClick = {
+                navHostController.navigate(Screen.PdfViewer.route)
+            },
             shape = RoundedCornerShape(10.dp)
         ) {
             Text(text = stringResource(R.string.view_pdf))
@@ -142,7 +144,7 @@ fun HomeScreen(
                     tempUri = uri
                     cameraLauncher.launch(uri)
                 } else {
-                    Toast.makeText(context, "Camera permission denied!", Toast.LENGTH_SHORT).show()
+                    showToast("Camera permission denied!", Toast.LENGTH_SHORT)
                 }
             }
         )

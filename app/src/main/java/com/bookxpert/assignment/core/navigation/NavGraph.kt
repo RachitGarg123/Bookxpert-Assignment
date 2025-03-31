@@ -13,6 +13,7 @@ import com.bookxpert.assignment.home.presentation.HomeScreen
 import com.bookxpert.assignment.signIn.presentation.GoogleSignInScreen
 import com.bookxpert.assignment.home.presentation.HomeViewModel
 import com.bookxpert.assignment.objectDetails.presentation.ObjectDataScreen
+import com.bookxpert.assignment.pdfViewer.presentation.PdfViewer
 
 @Composable
 fun SetupNavGraph(
@@ -62,6 +63,11 @@ fun SetupNavGraph(
             val encodedUri = navBackStackEntry.arguments?.getString(CAMERAX_PREVIEW_KEY)
             val imageUri = encodedUri?.let { Uri.parse(it) }
             CameraPreviewScreen(navController, innerPadding, imageUri)
+        }
+        composable(
+            route = Screen.PdfViewer.route
+        ) {
+            PdfViewer(innerPadding)
         }
     }
 }

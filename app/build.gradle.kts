@@ -36,15 +36,23 @@ android {
     productFlavors {
         create("development") {
             buildConfigField("String","BASE_URL","\"https://api.restful-api.dev/\"")
+            buildConfigField("String","PDF_BASE_URL","\"https://docs.google.com/gview?embedded=true&url=\"")
+            buildConfigField("String","PDF_URL","\"https://fssservices.bookxpert.co/GeneratedPDF/Companies/nadc/2024-2025/BalanceSheet.pdf\"")
         }
         create("qa") {
             buildConfigField("String","BASE_URL","\"https://api.restful-api.dev/\"")
+            buildConfigField("String","PDF_BASE_URL","\"https://docs.google.com/gview?embedded=true&url=\"")
+            buildConfigField("String","PDF_URL","\"https://fssservices.bookxpert.co/GeneratedPDF/Companies/nadc/2024-2025/BalanceSheet.pdf\"")
         }
         create("preproduction") {
             buildConfigField("String","BASE_URL","\"https://api.restful-api.dev/\"")
+            buildConfigField("String","PDF_BASE_URL","\"https://docs.google.com/gview?embedded=true&url=\"")
+            buildConfigField("String","PDF_URL","\"https://fssservices.bookxpert.co/GeneratedPDF/Companies/nadc/2024-2025/BalanceSheet.pdf\"")
         }
         create("production") {
             buildConfigField("String","BASE_URL","\"https://api.restful-api.dev/\"")
+            buildConfigField("String","PDF_BASE_URL","\"https://docs.google.com/gview?embedded=true&url=\"")
+            buildConfigField("String","PDF_URL","\"https://fssservices.bookxpert.co/GeneratedPDF/Companies/nadc/2024-2025/BalanceSheet.pdf\"")
         }
     }
 
