@@ -30,6 +30,8 @@ import coil3.compose.rememberAsyncImagePainter
 import com.bookxpert.assignment.R
 import com.bookxpert.assignment.captureImage.domain.captureImage
 import com.bookxpert.assignment.captureImage.domain.getCameraProvider
+import com.bookxpert.assignment.core.utility.LogType
+import com.bookxpert.assignment.core.utility.printLog
 
 
 @Composable
@@ -57,7 +59,9 @@ fun CameraPreviewScreen(
         preview.surfaceProvider = previewView.surfaceProvider
     }
     Box(contentAlignment = Alignment.BottomCenter, modifier = Modifier.fillMaxSize().padding(innerPadding)) {
-        imageUri = galleryImageUri
+        if(!galleryImageUri?.toString().isNullOrEmpty()) {
+            imageUri = galleryImageUri
+        }
         if(imageUri != null) {
             Image(
                 modifier = Modifier.fillMaxSize(),
@@ -69,10 +73,12 @@ fun CameraPreviewScreen(
             Button(
                 modifier = Modifier.padding(20.dp),
                 onClick = {
+                    printLog(LogType.DEBUG, "cameraX", "imageCapture --> $imageCapture contex ----> $context")
                     captureImage(
                         imageCapture,
                         context,
                         imageCaptured = { savedUri ->
+                            printLog(LogType.DEBUG, "cameraX", "savedImageUri ---> $savedUri")
                             imageUri = savedUri
                         }
                     )

@@ -10,6 +10,8 @@ import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.core.content.ContextCompat
 import com.bookxpert.assignment.core.constants.AppConstants
+import com.bookxpert.assignment.core.utility.LogType
+import com.bookxpert.assignment.core.utility.printLog
 import com.bookxpert.assignment.core.utility.showToast
 
 fun captureImage(imageCapture: ImageCapture, context: Context, imageCaptured: (Uri?)-> Unit) {
@@ -30,6 +32,7 @@ fun captureImage(imageCapture: ImageCapture, context: Context, imageCaptured: (U
         ContextCompat.getMainExecutor(context),
         object : ImageCapture.OnImageSavedCallback {
             override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
+                printLog(LogType.DEBUG, "cameraX", "savedImageUri ---> ${outputFileResults.savedUri}")
                 imageCaptured(outputFileResults.savedUri)
             }
             override fun onError(exception: ImageCaptureException) {
