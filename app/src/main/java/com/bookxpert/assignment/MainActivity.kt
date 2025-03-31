@@ -22,11 +22,13 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.bookxpert.assignment.core.navigation.Screen
 import com.bookxpert.assignment.core.navigation.SetupNavGraph
+import com.bookxpert.assignment.objectDetails.presentation.ObjectsViewModel
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     private val homeViewModel: HomeViewModel by viewModels()
+    private val objectsViewModel: ObjectsViewModel by viewModels()
     private lateinit var navController: NavHostController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +40,8 @@ class MainActivity : ComponentActivity() {
                 navController = rememberNavController()
                 LoadUiSetUpNavGraph(
                     navController = navController,
-                    homeViewModel = homeViewModel
+                    homeViewModel = homeViewModel,
+                    objectsViewModel = objectsViewModel
                 )
             }
         }
@@ -51,6 +54,7 @@ fun LoadUiSetUpNavGraph(
     modifier: Modifier = Modifier,
     navController: NavHostController,
     homeViewModel: HomeViewModel,
+    objectsViewModel: ObjectsViewModel
 ) {
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         val isUserLoggedIn by homeViewModel.isUserLoggedIn.collectAsState()
@@ -64,7 +68,8 @@ fun LoadUiSetUpNavGraph(
                 navController = navController,
                 homeViewModel = homeViewModel,
                 startDestination = startDestination,
-                innerPadding = innerPadding
+                innerPadding = innerPadding,
+                objectsViewModel = objectsViewModel
             )
         }
     }

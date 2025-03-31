@@ -4,8 +4,11 @@ import android.content.Context
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.preferencesDataStoreFile
 import com.bookxpert.assignment.BuildConfig
+import com.bookxpert.assignment.core.AssignmentBookxpertApplication
 import com.bookxpert.assignment.core.networking.ApiInterface
 import com.bookxpert.assignment.core.constants.AppConstants
+import com.bookxpert.assignment.core.roomdb.ObjectsDao
+import com.bookxpert.assignment.core.roomdb.ObjectsDatabase
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -46,5 +49,11 @@ object ApiInterfaceProvider {
     @Provides
     fun providesDataStore(@ApplicationContext context: Context) = PreferenceDataStoreFactory.create {
         context.preferencesDataStoreFile(AppConstants.NOTIFICATION_PREFERENCES)
+    }
+
+    @Singleton
+    @Provides
+    fun providesRoomDao(@ApplicationContext context: Context): ObjectsDao{
+        return ObjectsDatabase.getInstance(context).objectsDao()
     }
 }

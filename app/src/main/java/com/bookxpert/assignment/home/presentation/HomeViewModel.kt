@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bookxpert.assignment.core.AssignmentBookxpertApplication
+import com.bookxpert.assignment.core.roomdb.ObjectsDao
 import com.bookxpert.assignment.core.roomdb.ObjectsDatabase
 import com.bookxpert.assignment.core.roomdb.ObjectsEntity
 import com.bookxpert.assignment.home.data.HomeRepository
@@ -23,10 +24,7 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val homeRepository: HomeRepository): ViewModel() {
-
-    private val database = ObjectsDatabase.getInstance(AssignmentBookxpertApplication.appContext)
-    private val objectsDao = database.objectsDao()
+class HomeViewModel @Inject constructor(private val homeRepository: HomeRepository, private val objectsDao: ObjectsDao): ViewModel() {
 
     private var _objectsResponse = MutableStateFlow<MutableList<Objects>>(mutableListOf())
     val objectsResponse: StateFlow<MutableList<Objects>>  = _objectsResponse
@@ -36,9 +34,6 @@ class HomeViewModel @Inject constructor(private val homeRepository: HomeReposito
 
     private var _isUserLoggedIn = MutableStateFlow<Boolean?>(null)
     val isUserLoggedIn: StateFlow<Boolean?> = _isUserLoggedIn
-
-    private var _localDataResponse = MutableStateFlow<MutableList<Objects>>(mutableListOf())
-    val localDataResponse: StateFlow<MutableList<Objects>>  = _localDataResponse
 
     fun setupGoogleSignIn() {
         GoogleSignIn.setupGoogleSignIn()
@@ -71,11 +66,6 @@ class HomeViewModel @Inject constructor(private val homeRepository: HomeReposito
         insertObjectsData(objects)
     }
 
-    fun getObjectsFromLocal() = viewModelScope.launch {
-        objectsDao.getAllObjects()?.collect {
-            _localDataResponse.value = it?.objects?.toMutableList() ?: mutableListOf()
-        }
-    }
 
     fun getUserLoggedIn() = viewModelScope.launch {
         homeRepository.isUserLoggedIn.collect {

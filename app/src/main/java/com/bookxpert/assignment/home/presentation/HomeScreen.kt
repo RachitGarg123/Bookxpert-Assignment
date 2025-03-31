@@ -49,10 +49,13 @@ fun HomeScreen(
     navHostController: NavHostController,
     homeViewModel: HomeViewModel
 ) {
-    val objectsResponse by  homeViewModel.objectsResponse.collectAsState()
+    val objectsResponse by homeViewModel.objectsResponse.collectAsState()
     val isLoading by  homeViewModel.isLoading.collectAsState()
     var showDialog by remember { mutableStateOf(false) }
-
+    if(objectsResponse.isNotEmpty()) {
+        showToast("Api Success", Toast.LENGTH_SHORT)
+        homeViewModel.insertAllObjectsData(objectsResponse)
+    }
     Column(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -62,10 +65,6 @@ fun HomeScreen(
             Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 CircularProgressIndicator()
             }
-        }
-        if(objectsResponse.isNotEmpty()) {
-            showToast("Api Success", Toast.LENGTH_SHORT)
-            homeViewModel.insertAllObjectsData(objectsResponse)
         }
         Button(
             onClick = {

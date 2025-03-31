@@ -9,10 +9,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.bookxpert.assignment.captureImage.presentation.CameraPreviewScreen
+import com.bookxpert.assignment.home.data.Objects
 import com.bookxpert.assignment.home.presentation.HomeScreen
 import com.bookxpert.assignment.signIn.presentation.GoogleSignInScreen
 import com.bookxpert.assignment.home.presentation.HomeViewModel
 import com.bookxpert.assignment.objectDetails.presentation.ObjectDataScreen
+import com.bookxpert.assignment.objectDetails.presentation.ObjectsViewModel
 import com.bookxpert.assignment.pdfViewer.presentation.PdfViewer
 
 @Composable
@@ -21,6 +23,7 @@ fun SetupNavGraph(
     homeViewModel: HomeViewModel,
     startDestination: String,
     innerPadding: PaddingValues,
+    objectsViewModel: ObjectsViewModel
 ) {
     NavHost(
         navController = navController,
@@ -47,8 +50,8 @@ fun SetupNavGraph(
         ) {
             ObjectDataScreen(
                 navHostController = navController,
-                homeViewModel = homeViewModel,
-                innerPadding = innerPadding
+                innerPadding = innerPadding,
+                objectsViewModel = objectsViewModel
             )
         }
         composable(
