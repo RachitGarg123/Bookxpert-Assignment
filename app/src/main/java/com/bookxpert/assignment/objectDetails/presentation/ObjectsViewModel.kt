@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bookxpert.assignment.core.networking.ApiInterface
 import com.bookxpert.assignment.core.roomdb.ObjectsDao
+import com.bookxpert.assignment.core.utility.LogType
+import com.bookxpert.assignment.core.utility.printLog
 import com.bookxpert.assignment.home.data.Objects
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -29,6 +31,7 @@ class ObjectsViewModel @Inject constructor(private val apiInterface: ApiInterfac
             val updatedList = localDataResponse.value.map {
                 if (it.id == objects.id) it.copy(data = objects.data) else it
             }.toMutableList()
+            printLog(LogType.DEBUG, "roomEdit", "updatedList --> $updatedList")
             _localDataResponse.value = updatedList
         }
     }
