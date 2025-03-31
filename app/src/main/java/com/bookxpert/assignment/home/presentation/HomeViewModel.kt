@@ -3,13 +3,11 @@ package com.bookxpert.assignment.home.presentation
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bookxpert.assignment.core.AssignmentBookxpertApplication
 import com.bookxpert.assignment.core.roomdb.ObjectsDao
-import com.bookxpert.assignment.core.roomdb.ObjectsDatabase
 import com.bookxpert.assignment.core.roomdb.ObjectsEntity
-import com.bookxpert.assignment.home.data.HomeRepository
-import com.bookxpert.assignment.home.data.Objects
-import com.bookxpert.assignment.home.domain.GoogleSignIn
+import com.bookxpert.assignment.home.data.repository.HomeRepository
+import com.bookxpert.assignment.home.data.dataclasses.Objects
+import com.bookxpert.assignment.signIn.domain.GoogleSignIn
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

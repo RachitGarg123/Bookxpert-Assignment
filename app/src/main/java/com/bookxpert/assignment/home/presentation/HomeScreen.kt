@@ -97,7 +97,7 @@ fun HomeScreen(
 
         Button(
             onClick = {
-                navHostController.navigate("objects_screen/"+checked)
+                navHostController.navigate("objects_screen/$checked")
             },
             shape = RoundedCornerShape(10.dp)
         ) {
@@ -105,11 +105,7 @@ fun HomeScreen(
         }
         Row(verticalAlignment = Alignment.CenterVertically) {
             RequestNotificationPermission { permissionGranted ->
-                if(!permissionGranted) {
-                    checked = false
-                } else {
-                    checked = true
-                }
+                checked = permissionGranted
             }
             Text(
                 text = stringResource(R.string.push_notifications),

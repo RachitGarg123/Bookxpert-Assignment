@@ -9,7 +9,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.bookxpert.assignment.captureImage.presentation.CameraPreviewScreen
-import com.bookxpert.assignment.home.data.Objects
 import com.bookxpert.assignment.home.presentation.HomeScreen
 import com.bookxpert.assignment.signIn.presentation.GoogleSignInScreen
 import com.bookxpert.assignment.home.presentation.HomeViewModel
@@ -54,7 +53,6 @@ fun SetupNavGraph(
             )
         ) {
             ObjectDataScreen(
-                navHostController = navController,
                 innerPadding = innerPadding,
                 objectsViewModel = objectsViewModel,
                 pushNotificationEnabled = it.arguments?.getBoolean(OBJECT_SCREEN_KEY)
@@ -71,7 +69,7 @@ fun SetupNavGraph(
         ) { navBackStackEntry ->
             val encodedUri = navBackStackEntry.arguments?.getString(CAMERAX_PREVIEW_KEY)
             val imageUri = encodedUri?.let { Uri.parse(it) }
-            CameraPreviewScreen(navController, innerPadding, imageUri)
+            CameraPreviewScreen(innerPadding, imageUri)
         }
         composable(
             route = Screen.PdfViewer.route

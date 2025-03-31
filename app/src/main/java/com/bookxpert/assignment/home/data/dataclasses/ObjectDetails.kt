@@ -1,4 +1,4 @@
-package com.bookxpert.assignment.home.data
+package com.bookxpert.assignment.home.data.dataclasses
 
 data class ObjectDetails(
     val color: String? = null,

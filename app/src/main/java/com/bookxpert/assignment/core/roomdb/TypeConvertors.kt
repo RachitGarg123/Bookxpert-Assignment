@@ -1,6 +1,6 @@
 package com.bookxpert.assignment.core.roomdb
 
-import com.bookxpert.assignment.home.data.Objects
+import com.bookxpert.assignment.home.data.dataclasses.Objects
 import androidx.room.TypeConverter
 import com.bookxpert.assignment.core.utility.LogType
 import com.bookxpert.assignment.core.utility.printLog

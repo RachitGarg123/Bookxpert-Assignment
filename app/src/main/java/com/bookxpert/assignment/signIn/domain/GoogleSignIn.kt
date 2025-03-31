@@ -1,4 +1,4 @@
-package com.bookxpert.assignment.home.domain
+package com.bookxpert.assignment.signIn.domain
 
 import android.app.Activity
 import android.content.Context

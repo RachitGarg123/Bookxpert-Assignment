@@ -25,18 +25,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.compose.LocalLifecycleOwner
-import androidx.navigation.NavHostController
 import coil3.compose.rememberAsyncImagePainter
 import com.bookxpert.assignment.R
 import com.bookxpert.assignment.captureImage.domain.captureImage
 import com.bookxpert.assignment.captureImage.domain.getCameraProvider
-import com.bookxpert.assignment.core.utility.LogType
-import com.bookxpert.assignment.core.utility.printLog
-
 
 @Composable
 fun CameraPreviewScreen(
-    navHostController: NavHostController,
     innerPadding: PaddingValues,
     galleryImageUri: Uri?
 ) {
@@ -66,19 +61,17 @@ fun CameraPreviewScreen(
             Image(
                 modifier = Modifier.fillMaxSize(),
                 painter = rememberAsyncImagePainter(imageUri),
-                contentDescription = "capture-image"
+                contentDescription = stringResource(R.string.capture_image)
             )
         } else {
             AndroidView({ previewView }, modifier = Modifier.fillMaxSize())
             Button(
                 modifier = Modifier.padding(20.dp),
                 onClick = {
-                    printLog(LogType.DEBUG, "cameraX", "imageCapture --> $imageCapture contex ----> $context")
                     captureImage(
                         imageCapture,
                         context,
                         imageCaptured = { savedUri ->
-                            printLog(LogType.DEBUG, "cameraX", "savedImageUri ---> $savedUri")
                             imageUri = savedUri
                         }
                     )

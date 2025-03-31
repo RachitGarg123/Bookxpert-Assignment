@@ -1,6 +1,5 @@
 package com.bookxpert.assignment.objectDetails.presentation
 
-import android.widget.Space
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -31,23 +30,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
 import com.bookxpert.assignment.R
 import com.bookxpert.assignment.core.AssignmentBookxpertApplication
-import com.bookxpert.assignment.core.navigation.OBJECT_SCREEN_KEY
 import com.bookxpert.assignment.core.utility.LogType
 import com.bookxpert.assignment.core.utility.printLog
-import com.bookxpert.assignment.home.data.Objects
-import com.bookxpert.assignment.home.presentation.HomeViewModel
+import com.bookxpert.assignment.home.data.dataclasses.Objects
 import com.bookxpert.assignment.notification.domain.showDeleteNotification
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ObjectDataScreen(
-    navHostController: NavHostController,
     modifier: Modifier = Modifier,
     objectsViewModel: ObjectsViewModel,
     innerPadding: PaddingValues,

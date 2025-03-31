@@ -19,7 +19,7 @@ fun captureImage(imageCapture: ImageCapture, context: Context, imageCaptured: (U
         put(MediaStore.MediaColumns.DISPLAY_NAME, AppConstants.CAMERAX_NAME)
         put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
-            put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/CameraX-Image")
+            put(MediaStore.Images.Media.RELATIVE_PATH, AppConstants.MEDIA_RELATIVE_PATH)
         }
     }
     val outputOptions = ImageCapture.OutputFileOptions.Builder(

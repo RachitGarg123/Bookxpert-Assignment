@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.preferencesDataStoreFile
 import com.bookxpert.assignment.BuildConfig
-import com.bookxpert.assignment.core.AssignmentBookxpertApplication
 import com.bookxpert.assignment.core.networking.ApiInterface
 import com.bookxpert.assignment.core.constants.AppConstants
 import com.bookxpert.assignment.core.roomdb.ObjectsDao

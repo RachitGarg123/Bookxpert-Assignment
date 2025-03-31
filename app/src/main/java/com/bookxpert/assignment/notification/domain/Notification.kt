@@ -6,14 +6,15 @@ import android.content.Context
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.bookxpert.assignment.R
+import com.bookxpert.assignment.core.constants.AppConstants
 
 fun createNotificationChannel(context: Context) {
     val channel = NotificationChannel(
-        "delete_channel",
-        "Deleted Item Notifications",
+        AppConstants.CHANNEL_ID,
+        AppConstants.CHANNEL_NAME,
         NotificationManager.IMPORTANCE_HIGH
     ).apply {
-        description = "Shows notifications when an item is deleted"
+        description = AppConstants.CHANNEL_DESCRIPTION
     }
 
     val notificationManager = context.getSystemService(NotificationManager::class.java)
@@ -26,9 +27,9 @@ fun showDeleteNotification(context: Context, objectName: String) {
         context, NotificationManager::class.java
     ) as NotificationManager
 
-    val notification = NotificationCompat.Builder(context, "delete_channel")
+    val notification = NotificationCompat.Builder(context, AppConstants.CHANNEL_ID)
         .setSmallIcon(R.drawable.ic_app_logo) // Use your app icon
-        .setContentTitle("Item Deleted")
+        .setContentTitle(AppConstants.NOTIFICATION_DELETED)
         .setContentText("$objectName was deleted from the list.")
         .setPriority(NotificationCompat.PRIORITY_HIGH)
         .setAutoCancel(true)
