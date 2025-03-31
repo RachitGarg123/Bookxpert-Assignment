@@ -1,14 +1,11 @@
 package com.bookxpert.assignment.home.presentation
 
 import android.Manifest
-import android.app.Activity
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.net.Uri
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,7 +14,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -27,7 +23,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -44,7 +39,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.window.Dialog
 import androidx.core.content.ContextCompat
-import coil3.compose.rememberAsyncImagePainter
 import com.bookxpert.assignment.core.navigation.Screen
 import com.bookxpert.assignment.core.utility.createImageFile
 import com.bookxpert.assignment.core.utility.showToast
@@ -125,8 +119,6 @@ fun HomeScreen(
     }
     if(showDialog) {
         val context = LocalContext.current
-        val activity = context as? Activity
-        val bitmap: MutableState<Bitmap?> = remember { mutableStateOf(null) }
         var imageUri by remember { mutableStateOf<Uri?>(null) }
         var tempUri by remember { mutableStateOf<Uri?>(null) }
 
@@ -176,10 +168,7 @@ fun HomeScreen(
                     Text(
                         modifier = Modifier.padding(vertical = 15.dp, horizontal = 10.dp).clickable {
                             if (ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-                                navHostController.navigate("camera_preview_screen/") {}
-//                            val uri = createImageFile(context)
-//                            imageUri = uri
-//                            launcher.launch(uri)
+                                navHostController.navigate("camera_preview_screen/"+null) {}
                             } else {
                                 requestPermissionLauncher.launch(Manifest.permission.CAMERA)
                             }
@@ -190,33 +179,10 @@ fun HomeScreen(
                     Text(
                         modifier = Modifier.padding(vertical = 15.dp, horizontal = 10.dp).clickable {
                             galleryLauncher.launch("image/*")
-//                            showDialog = false
                         },
                         text = stringResource(R.string.gallery),
                         fontSize = 20.sp
                     )
-                    imageUri?.let { uri ->
-//                    LaunchedEffect(uri) {
-//                        printLog(LogType.DEBUG, "imageVector", "uri ----> $uri")
-//                        bitmap.value = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-//                            ImageDecoder.decodeBitmap(ImageDecoder.createSource(context.contentResolver, uri))
-//                        } else {
-//                            MediaStore.Images.Media.getBitmap(context.contentResolver, uri)
-//                        }
-//                    }
-//                    Toast.makeText(context, it.path, Toast.LENGTH_LONG).show()
-//                    bitmap.value?.let { bmp ->
-//                    imageUri?.let { uri ->
-                        Image(
-                            painter = rememberAsyncImagePainter(uri),
-//                            bitmap = bmp.asImageBitmap(),
-                            contentDescription = "Captured Image",
-                            modifier = Modifier
-                                .size(200.dp)
-                                .padding(top = 16.dp)
-                        )
-//                    }
-                    }
                 }
             }
         }

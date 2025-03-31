@@ -9,8 +9,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.bookxpert.assignment.captureImage.presentation.CameraPreviewScreen
-import com.bookxpert.assignment.core.utility.LogType
-import com.bookxpert.assignment.core.utility.printLog
 import com.bookxpert.assignment.home.presentation.HomeScreen
 import com.bookxpert.assignment.signIn.presentation.GoogleSignInScreen
 import com.bookxpert.assignment.home.presentation.HomeViewModel
@@ -61,7 +59,6 @@ fun SetupNavGraph(
                 }
             )
         ) { navBackStackEntry ->
-            printLog(LogType.DEBUG, "imageUri", "${navBackStackEntry.arguments?.getString(CAMERAX_PREVIEW_KEY)}")
             val encodedUri = navBackStackEntry.arguments?.getString(CAMERAX_PREVIEW_KEY)
             val imageUri = encodedUri?.let { Uri.parse(it) }
             CameraPreviewScreen(navController, innerPadding, imageUri)

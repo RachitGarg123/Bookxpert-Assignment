@@ -5,4 +5,5 @@ object AppConstants {
     const val IS_USER_LOGGED_IN_KEY = "isUserLoggedIn"
     const val NOTIFICATION_PREFERENCES = "notification_preferences"
     const val DEBUG = "debug"
+    const val CAMERAX_NAME = "CameraxImage.jpeg"
 }
