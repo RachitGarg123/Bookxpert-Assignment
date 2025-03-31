@@ -36,10 +36,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.bookxpert.assignment.R
+import com.bookxpert.assignment.core.AssignmentBookxpertApplication
+import com.bookxpert.assignment.core.navigation.OBJECT_SCREEN_KEY
 import com.bookxpert.assignment.core.utility.LogType
 import com.bookxpert.assignment.core.utility.printLog
 import com.bookxpert.assignment.home.data.Objects
 import com.bookxpert.assignment.home.presentation.HomeViewModel
+import com.bookxpert.assignment.notification.domain.showDeleteNotification
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -47,7 +50,8 @@ fun ObjectDataScreen(
     navHostController: NavHostController,
     modifier: Modifier = Modifier,
     objectsViewModel: ObjectsViewModel,
-    innerPadding: PaddingValues
+    innerPadding: PaddingValues,
+    pushNotificationEnabled: Boolean?
 ) {
     val localDataResponse by objectsViewModel.localDataResponse.collectAsState()
     var showTextField by remember { mutableStateOf(false) }
@@ -92,6 +96,12 @@ fun ObjectDataScreen(
 
                             SwipeToDismissBoxValue.EndToStart -> { // Swipe Left -> Delete
                                 objectsViewModel.deleteLocalObjectData(objectData)
+                                if(pushNotificationEnabled == true) {
+                                    showDeleteNotification(
+                                        AssignmentBookxpertApplication.appContext,
+                                        objectData.name ?: ""
+                                    )
+                                }
                                 true
                             }
 

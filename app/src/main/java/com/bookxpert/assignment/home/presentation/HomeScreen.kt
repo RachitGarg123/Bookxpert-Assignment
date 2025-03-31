@@ -42,6 +42,7 @@ import androidx.core.content.ContextCompat
 import com.bookxpert.assignment.core.navigation.Screen
 import com.bookxpert.assignment.core.utility.createImageFile
 import com.bookxpert.assignment.core.utility.showToast
+import com.bookxpert.assignment.notification.domain.RequestNotificationPermission
 
 @Composable
 fun HomeScreen(
@@ -52,6 +53,7 @@ fun HomeScreen(
     val objectsResponse by homeViewModel.objectsResponse.collectAsState()
     val isLoading by  homeViewModel.isLoading.collectAsState()
     var showDialog by remember { mutableStateOf(false) }
+    var checked by remember { mutableStateOf(false) }
     if(objectsResponse.isNotEmpty()) {
         showToast("Api Success", Toast.LENGTH_SHORT)
         homeViewModel.insertAllObjectsData(objectsResponse)
@@ -95,14 +97,20 @@ fun HomeScreen(
 
         Button(
             onClick = {
-                navHostController.navigate(Screen.Objects.route)
+                navHostController.navigate("objects_screen/"+checked)
             },
             shape = RoundedCornerShape(10.dp)
         ) {
             Text(text = stringResource(R.string.view_data))
         }
         Row(verticalAlignment = Alignment.CenterVertically) {
-            var checked by remember { mutableStateOf(false) }
+            RequestNotificationPermission { permissionGranted ->
+                if(!permissionGranted) {
+                    checked = false
+                } else {
+                    checked = true
+                }
+            }
             Text(
                 text = stringResource(R.string.push_notifications),
                 modifier = modifier,

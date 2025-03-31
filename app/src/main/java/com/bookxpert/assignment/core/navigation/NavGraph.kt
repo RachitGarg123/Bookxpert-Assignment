@@ -46,12 +46,18 @@ fun SetupNavGraph(
             )
         }
         composable(
-            route = Screen.Objects.route,
+            route = "objects_screen/{$OBJECT_SCREEN_KEY}",
+            arguments = listOf(
+                navArgument(OBJECT_SCREEN_KEY) {
+                    type = NavType.BoolType
+                }
+            )
         ) {
             ObjectDataScreen(
                 navHostController = navController,
                 innerPadding = innerPadding,
-                objectsViewModel = objectsViewModel
+                objectsViewModel = objectsViewModel,
+                pushNotificationEnabled = it.arguments?.getBoolean(OBJECT_SCREEN_KEY)
             )
         }
         composable(
