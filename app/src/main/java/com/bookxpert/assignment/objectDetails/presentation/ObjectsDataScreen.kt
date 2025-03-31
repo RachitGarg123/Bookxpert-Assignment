@@ -11,8 +11,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.bookxpert.assignment.core.utility.LogType
-import com.bookxpert.assignment.core.utility.printLog
 import com.bookxpert.assignment.home.presentation.HomeViewModel
 
 @Composable

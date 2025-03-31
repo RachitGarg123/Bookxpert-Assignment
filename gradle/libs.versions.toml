@@ -1,5 +1,6 @@
 [versions]
 agp = "8.7.2"
+cameraCore = "1.4.2"
 coilCompose = "3.1.0"
 credentials = "1.5.0"
 datastorePreferences = "1.1.4"
@@ -22,6 +23,10 @@ googleServices = "4.4.2"
 navigationCompose = "2.8.9"
 
 [libraries]
+androidx-camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "cameraCore" }
+androidx-camera-core = { module = "androidx.camera:camera-core", version.ref = "cameraCore" }
+androidx-camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "cameraCore" }
+androidx-camera-view = { module = "androidx.camera:camera-view", version.ref = "cameraCore" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-credentials = { module = "androidx.credentials:credentials", version.ref = "credentials" }
 androidx-credentials-play-services-auth = { module = "androidx.credentials:credentials-play-services-auth", version.ref = "credentials" }

@@ -10,6 +10,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.bookxpert.assignment.home.data.ObjectDetails
@@ -29,17 +30,20 @@ fun ObjectDataItem(
     ) {
         Text(
             text = objects.name ?: "--",
-            modifier = modifier.weight(1f)
+            modifier = modifier.weight(1f),
+            maxLines = 2,
+            overflow = TextOverflow.Ellipsis
         )
         Column(modifier = modifier.weight(1f)) {
             Text(
                 text = objects.data?.color ?: "--",
                 maxLines = 1,
-
+                overflow = TextOverflow.Ellipsis
             )
             Text(
                 text = objects.data?.capacity ?: "--",
-                maxLines = 1
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
             )
         }
     }

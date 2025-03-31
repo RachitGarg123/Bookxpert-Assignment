@@ -10,4 +10,6 @@
     <string name="sign_up_with_google">Sign up with Google</string>
     <string name="google_icon">Google Icon</string>
     <string name="person_placeholder">Person Placeholder</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
 </resources>
